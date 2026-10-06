@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hello World</title>
+<style>
+body { margin:0; height:100vh; overflow:hidden; background:#6a11cb; font-family:Arial; transition:background 1s; }
+h1 { position:absolute; left:40%; top:35%; color:white; font-size:65px; margin:0; }
+.controls { position:fixed; bottom:40px; width:100%; text-align:center; z-index:10; }
+button { padding:14px 24px; margin:5px; border:0; border-radius:30px; font-size:17px; cursor:pointer; }
+</style>
+</head>
+<body>
+<h1 id="hello">Hello World!</h1>
+<div class="controls">
+<button onclick="changeColour()">Change Background 🎨</button>
+<button onclick="bounce()">Bounce Around ✨</button>
+</div>
+<script>
+const hello=document.getElementById("hello");
+let moving=false,x=200,y=150,dx=5,dy=4;
+function changeColour(){
+ const colours=["#6a11cb","#ff3d9a","#1abc9c","#ff7b54","#2536a7"];
+ document.body.style.background=colours[Math.floor(Math.random()*colours.length)];
+}
+function bounce(){
+ moving=!moving;
+ function animate(){
+  if(!moving)return;
+  x+=dx;y+=dy;
+  if(x<=0||x+hello.offsetWidth>=innerWidth)dx*=-1;
+  if(y<=0||y+hello.offsetHeight>=innerHeight)dy*=-1;
+  hello.style.left=x+"px";hello.style.top=y+"px";
+  requestAnimationFrame(animate);
+ }
+ if(moving)animate();
+}
+</script>
+</body>
+</html>
